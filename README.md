@@ -15,7 +15,7 @@ This repository has no guarantee of efficient code, only code that has been run 
 1. **LPA_superscript_dirpath.m**: Provided a 'glob/dir' path to T2 FLAIR NIFTI images, Python/MatLab respective functionality, this script will run LPA sequentially for every image.
 2. **Script for creating binary lesion map**
 3. **Script for calculating wmh volume from lesion map**
-4. Pigz implementation (Parallel Gunzip https://github.com/madler/pigz) through MatLab's cmd call: https://github.com/torgil01/HUNT/blob/master/Matlab/private/myGunzip.m or Gunzip through MatLab's own interface in "insert-file-name.m".
+4. Pigz implementation (Parallel Gunzip https://github.com/madler/pigz) through MatLab's cmd call: https://github.com/torgil01/HUNT/blob/master/Matlab/private/myGunzip.m or Gunzip through MatLab's own interface in "myGunzip_pre_LPA.m".
 
 ## File descriptions: (UBO)
 1. **Script that suppresses QC?**
