@@ -12,7 +12,7 @@ Successful runs of:
 - UBO Detector
 
 File descriptions:
-- LPA_superscript_dirpath.m: (LPA) Provided a 'glob/dir' path to T2 FLAIR NIFTI images, Python/MatLab respectively, this script will run LPA sequentially for every image.
+- LPA_superscript_dirpath.m: (LPA) Provided a 'glob/dir' path to T2 FLAIR NIFTI images, Python/MatLab respective functionality, this script will run LPA sequentially for every image.
 -
 -
 
