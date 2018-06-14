@@ -40,7 +40,7 @@ if ~viajob
 else    
     job = varargin{1};    
     Vles = job.data_plm;
-    thr = job.bin_thresh; %THIS HAS BEEN ADDED BY LABHRACORGI by comparing with the functioning ps_LST_tlv.m file in LST toolbox.
+    thr = job.bin_thresh; %THIS HAS BEEN ADDED BY LABHRACORGI by comparing with the functioning ps_LST_tlv.m file in LST toolbox. Hopefully this is ONLY used in the binary mask creation algorithm. Which seems to be true (according to spm_LST.m). In any case just comment thres out when running LPA.
 end
 
 if ~void
