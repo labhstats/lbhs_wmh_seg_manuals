@@ -13,7 +13,7 @@ This repository has no guarantee of efficient code, only code that has been run 
 
 ## File descriptions: (LPA)
 1. **LPA_superscript_dirpath.m**: Provided a 'glob/dir' path to T2 FLAIR NIFTI images, Python/MatLab respective functionality, this script will run LPA sequentially for every image.
-2. **Script for creating binary lesion map.m**: 
+2. **binary_lesion_maps_post_LPA.m**: Provided a 'glob/dir' path to probability lesion maps (from LPA algorithm), Python/MatLab respective functionality, this script will create binary lesion maps with respect to some threshold specified by the user. (If the fix is not utilized then the threshold is "defaulted" to 0.5.)
 3. **extract_vol_noc_nogui_post_LPA.m**: Provided a 'glob/dir' path to probability lesion maps (from LPA algorithm), Python/MatLab respective functionality, this script will calculate total lesion volume (TLV) and number of clusters (NoC/N).
 4. Pigz implementation (Parallel Gunzip https://github.com/madler/pigz) through MatLab's cmd call: https://github.com/torgil01/HUNT/blob/master/Matlab/private/myGunzip.m or Gunzip through MatLab's own interface in "myGunzip_pre_LPA.m".
 
