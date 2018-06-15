@@ -11,6 +11,9 @@ This repository has no guarantee of efficient code, only code that has been run 
 - LPA (in LST 2.0.15)
 - UBO Detector
 
+## Ready for full scale project runs:
+- LPA (in LST 2.0.15)
+
 ## File descriptions: (LPA)
 1. **LPA_superscript_dirpath.m**: Provided a 'glob/dir' path to T2 FLAIR NIFTI images, Python/MatLab respective functionality, this script will run LPA sequentially for every image.
 2. **binary_lesion_maps_post_LPA.m**: Provided a 'glob/dir' path to probability lesion maps (from LPA algorithm), Python/MatLab respective functionality, this script will create binary lesion maps with respect to some threshold specified by the user. (If the fix is not utilized then the threshold is "defaulted" to 0.5.)
