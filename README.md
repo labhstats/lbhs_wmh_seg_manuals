@@ -24,6 +24,7 @@ This repository has no guarantee of efficient code, only code that has been run 
 ## File descriptions: (UBO)
 1. Script for creating specified UBO directory, BIDS are initially assumed: https://github.com/labhracorgi/mri_sort_filter_convert/blob/master/other/ubo_cns_copyfier_workspace.py
 2. "Correction/fixes" of scripts in algorithm? To hinder QC web viewers from popping up for thousands of individuals and thus potentially not exceeding available RAM during the calculation period.
+3. **Settings and new Dartel atlas for 40+ population? Or simply standard**
 
 ## Primarily systems tested on:
 - Debain 9 (Linux), Nvidia K420, Xeon 6 Core 3.60Ghz.
