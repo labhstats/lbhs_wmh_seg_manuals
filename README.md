@@ -7,7 +7,7 @@ General scripts will either be referenced or provided.
 
 This repository has no guarantee of efficient code, only code that has been run and works sufficiently.
 
-## Successful runs of:
+## Successful test runs of:
 - LPA (in LST 2.0.15)
 - UBO Detector
 
