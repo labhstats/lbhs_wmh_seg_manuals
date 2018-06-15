@@ -1,5 +1,5 @@
 # lbhs_wmh_seg_manuals
-Extra details of segmentation algorithms that are attempted to use. Specific detail will be given to problems and special care "required" for them to work satisfactory.
+Extra details of segmentation algorithms that are attempted to use. Specific detail will be given to problems and special care "required" for them to work satisfactory. This git is in no way trying to critize the algorithms or their creators, but instead to provide a subjective adaption such that it fits the intended project's (at http://www.medical-imaging.no/) needs.
 
 Check the wiki for details: https://github.com/labhracorgi/lbhs_wmh_seg_manuals/wiki
 
