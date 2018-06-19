@@ -7,6 +7,10 @@ General scripts will either be referenced or provided.
 
 This repository has no guarantee of efficient code, only code that has been run and works sufficiently.
 
+## "Possible" candidates currently in consideration:
+- https://github.com/NIC-VICOROB/SLSToolBox (Seem to require a lot of manual pre processing by the user compared to LPA and UBO.)
+- https://github.com/Kamnitsask/deepmedic (A lot of bugs and issues for unknown reasons.)
+
 ## Successful test runs of:
 - LPA (in LST 2.0.15)
 - UBO Detector
