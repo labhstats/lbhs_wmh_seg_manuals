@@ -8,8 +8,10 @@ General scripts will either be referenced or provided.
 This repository has no guarantee of efficient code, only code that has been run and works sufficiently.
 
 ## "Possible" candidates currently in consideration:
-- https://github.com/NIC-VICOROB/SLSToolBox (Seem to require a lot of manual pre processing by the user compared to LPA and UBO.)
-- https://github.com/Kamnitsask/deepmedic (A lot of bugs and issues for unknown reasons.)
+- ~~https://github.com/NIC-VICOROB/SLSToolBox (Seem to require a lot of manual pre processing by the user compared to LPA and UBO.)~~
+- ~~https://github.com/Kamnitsask/deepmedic (A lot of bugs and issues for unknown reasons.)~~
+- ~~W2MH algorithm at https://www.nitrc.org/projects/w2mhs (SPM12/MatLab and SVM RF based.)~~
+- Winner of MICCAI 2017 WMH segmentation https://github.com/hongweilibran/wmh_ibbmTum (Competition description http://wmh.isi.uu.nl/wp-content/uploads/2017/09/sysu_media.pdf and arxiv article https://arxiv.org/pdf/1802.05203.pdf)
 
 ## Successful test runs of:
 - LPA (in LST 2.0.15)
@@ -28,7 +30,7 @@ This repository has no guarantee of efficient code, only code that has been run 
 ## File descriptions: (UBO)
 1. Script for creating specified UBO directory, BIDS are initially assumed: https://github.com/labhracorgi/mri_sort_filter_convert/blob/master/other/ubo_cns_copyfier_workspace.py
 2. "Correction/fixes" of scripts in algorithm? To hinder QC web viewers from popping up for thousands of individuals and thus potentially not exceeding available RAM during the calculation period.
-3. **Settings and new Dartel atlas for 40+ population? Or simply standard**
+3. **Settings and new Dartel atlas for 40+ population? Or simply use standard/preset ones?**
 
 ## Primarily systems tested on:
 - Debain 9 (Linux), Nvidia K420, Xeon 6 Core 3.60Ghz.
