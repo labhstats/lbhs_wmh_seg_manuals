@@ -10,8 +10,10 @@ This repository has no guarantee of efficient code, only code that has been run 
 ## "Possible" candidates currently in consideration:
 - ~~https://github.com/NIC-VICOROB/SLSToolBox~~ (Seem to require a lot of manual pre processing by the user compared to LPA and UBO; whether this is a valid arguement may not be the case)
 - ~~https://github.com/Kamnitsask/deepmedic~~ (A lot of bugs and issues for unknown reasons.)
-- ~~W2MH algorithm at https://www.nitrc.org/projects/w2mhs~~ (SPM12/MatLab and SVM RF based.) May be worth looking further into.
-- ~~Winner of MICCAI 2017 WMH segmentation https://github.com/hongweilibran/wmh_ibbmTum (Competition description http://wmh.isi.uu.nl/wp-content/uploads/2017/09/sysu_media.pdf and arxiv article https://arxiv.org/pdf/1802.05203.pdf)~~ Do not seem to have nearly enough documentation for a beginner to apply.
+- ~~W2MH algorithm at https://www.nitrc.org/projects/w2mhs~~ (SPM12/MatLab and SVM RF based.) May be worth looking further into. Compiler issue though although other compiler is specified; not a rabbit hole worth pursueing.
+- ~~Winner of MICCAI 2017 WMH segmentation https://github.com/hongweilibran/wmh_ibbmTum (Competition description http://wmh.isi.uu.nl/wp-content/uploads/2017/09/sysu_media.pdf and arxiv article https://arxiv.org/pdf/1802.05203.pdf)~~ Do not seem to have nearly enough documentation for a beginner to apply and too many "diffuse" errors making implementation impossible to run a test case.
+- NiftiNet: 
+- DLTK: 
 
 ## Successful test runs of:
 - LPA (in LST 2.0.15)
