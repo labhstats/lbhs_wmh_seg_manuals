@@ -9,7 +9,7 @@ This repository has no guarantee of efficient code, only code that has been run 
 
 ## "Possible" candidates currently in consideration:
 Overlining means that the algorithm(s) in question is no longer considered.
-- ~~https://github.com/NIC-VICOROB/SLSToolBox~~ (Seem to require a lot of manual pre processing by the user compared to LPA and UBO; whether this is a valid arguement may not be the case)
+- ~~https://github.com/NIC-VICOROB/SLSToolBox~~ (Seem to require a lot of manual pre processing by the user compared to LPA and UBO; whether this is a valid arguement may not be the case.)
 - ~~https://github.com/Kamnitsask/deepmedic~~ (A lot of bugs and issues for unknown reasons.)  Too many "diffuse" errors making implementation impossible to run a test case.
 - ~~W2MH algorithm~~ at https://www.nitrc.org/projects/w2mhs (SPM12/MatLab and SVM RF based.) May be worth looking further into. Compiler issue though although other compiler is specified; not a rabbit hole worth pursueing.
 - ~~Winner of MICCAI 2017 WMH segmentation~~ https://github.com/hongweilibran/wmh_ibbmTum (Competition description http://wmh.isi.uu.nl/wp-content/uploads/2017/09/sysu_media.pdf and arxiv article https://arxiv.org/pdf/1802.05203.pdf) Do not seem to have nearly enough documentation for a beginner to apply. Git is also corrupt and no way to get the "full" model to apply directly.
@@ -17,12 +17,12 @@ Overlining means that the algorithm(s) in question is no longer considered.
 - ~~DLTK:~~ (Provides only abstractions of TensorFlow... and zoo not "wide" enough.)
 
 ## Successful test runs of:
-- LPA (in LST 2.0.15)
-- UBO Detector
-- Mnist CNN example (TensorFlow/Theano) on CPU
+- LPA (in LST 2.0.15);
+- UBO Detector;
+- Mnist CNN example (TensorFlow/Theano) on CPU.
 
 ## Ready for full scale project runs:
-- LPA (in LST 2.0.15)
+- LPA (in LST 2.0.15);
 - UBO Detector (While only using standard options.)
 
 ## File descriptions: (LPA)
@@ -42,4 +42,4 @@ Overlining means that the algorithm(s) in question is no longer considered.
 
 
 ## Software tested on:
-- Again, check the wiki for test run details https://github.com/labhracorgi/lbhs_wmh_seg_manuals/wiki
+- Again, check the wiki for test run details https://github.com/labhracorgi/lbhs_wmh_seg_manuals/wiki.
