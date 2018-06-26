@@ -37,7 +37,7 @@ Overlining means that the algorithm(s) in question is no longer considered.
 2. "Correction/fixes" of scripts in algorithm? To hinder QC web viewers from popping up for thousands of individuals and thus potentially not exceeding available RAM during the calculation period.
 3. **Settings and new Dartel atlas for 40+ population? Or simply use standard/preset ones; implies danger of over- and underfitting algorithm?**
 
-## Primarily systems tested on:
+## Primarily specifications of system(s) tested on:
 - Debain 9 (Linux), Nvidia K420, Xeon 6 Core 3.60Ghz.
 
 
