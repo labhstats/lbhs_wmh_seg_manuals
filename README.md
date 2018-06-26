@@ -7,7 +7,8 @@ General scripts will either be referenced or provided.
 
 This repository has no guarantee of efficient code, only code that has been run and works sufficiently.
 
-## "Possible" candidates currently in consideration: (Overlined means that they are no longer considered.)
+## "Possible" candidates currently in consideration:
+Overlining means that the algorithm(s) in question is no longer considered.
 - ~~https://github.com/NIC-VICOROB/SLSToolBox~~ (Seem to require a lot of manual pre processing by the user compared to LPA and UBO; whether this is a valid arguement may not be the case)
 - ~~https://github.com/Kamnitsask/deepmedic~~ (A lot of bugs and issues for unknown reasons.)  Too many "diffuse" errors making implementation impossible to run a test case.
 - ~~W2MH algorithm~~ at https://www.nitrc.org/projects/w2mhs (SPM12/MatLab and SVM RF based.) May be worth looking further into. Compiler issue though although other compiler is specified; not a rabbit hole worth pursueing.
