@@ -9,7 +9,7 @@ This repository has no guarantee of efficient code, only code that has been run 
 
 ## "Possible" candidates currently in consideration:
 Overlining means that the algorithm(s) in question is no longer considered.
-- ~~SLSToolBo:x~~ https://github.com/NIC-VICOROB/SLSToolBox (Seem to require a lot of manual pre processing by the user compared to LPA and UBO; whether this is a valid arguement may not be the case.)
+- ~~SLSToolBox:~~ https://github.com/NIC-VICOROB/SLSToolBox (Seem to require a lot of manual pre processing by the user compared to LPA and UBO; whether this is a valid arguement may not be the case.)
 - ~~DeepMedic:~~ https://github.com/Kamnitsask/deepmedic (A lot of bugs and issues for unknown reasons.)  Too many "diffuse" errors making implementation impossible to run a test case.
 - ~~W2MH algorithm:~~ at https://www.nitrc.org/projects/w2mhs (SPM12/MatLab and SVM RF based.) May be worth looking further into. Compiler issue though although other compiler is specified; not a rabbit hole worth pursueing.
 - ~~Winner of MICCAI 2017 WMH segmentation:~~ https://github.com/hongweilibran/wmh_ibbmTum (Competition description http://wmh.isi.uu.nl/wp-content/uploads/2017/09/sysu_media.pdf and arxiv article https://arxiv.org/pdf/1802.05203.pdf) Do not seem to have nearly enough documentation for a beginner to apply. Git is also corrupt and no way to get the "full" model to apply directly.
@@ -33,7 +33,7 @@ Overlining means that the algorithm(s) in question is no longer considered.
 5. "Correction/fixes" of scripts in algorithm? To allow user specified threshold when using the job interface in MatLab/SPM12 with **binary_lesion_maps_post_LPA.m**. Caution advised.
 
 ## File descriptions: (UBO)
-1. Script for creating specified UBO directory, BIDS are initially assumed: https://github.com/labhracorgi/mri_sort_filter_convert/blob/master/other/ubo_cns_copyfier_workspace.py
+1. Script for creating specified UBO directory, BIDS are initially assumed: https://github.com/labhracorgi/mri_sort_filter_convert/blob/master/other/ubo_cns_copyfier_workspace.py (or https://github.com/labhracorgi/mri_sort_filter_convert/blob/master/other/ubo_cns_copyfier_workspace_manual_ids.py for manual input of IDs.)
 2. "Correction/fixes" of scripts in algorithm? To hinder QC web viewers from popping up for thousands of individuals and thus potentially not exceeding available RAM during the calculation period.
 3. **Settings and new Dartel atlas for 40+ population? Or simply use standard/preset ones; implies danger of over- and underfitting algorithm?**
 
