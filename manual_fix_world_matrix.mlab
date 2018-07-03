@@ -1,0 +1,678 @@
+// MDL v1 utf8
+network  {
+  watchlist = ""
+}
+module itkImageFileWriter {
+  internal  {
+    frame = "349 181 136 56"
+    moduleGroupName = ""
+    windows  {
+      window _default {
+        geometry = "2251 296 927 526"
+        sizeHint = "293 418"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = NIFTIOUTPUT
+    useCompression = FALSE
+    correctSubVoxelShift = FALSE
+    forceDirectionCosineWrite = TRUE
+    outputVoxelType = Automatic
+    info = "File saved successfully"
+    unresolvedFileName = $(DicomBrowserPath)/4_wmh_cases_collected/100152/100152_WMH_FLAIRspace_MLABfix.nii.gz
+  }
+}
+module Info {
+  internal  {
+    frame = "681 301 128 72"
+    moduleGroupName = ""
+    windows  {
+      window _default {
+        geometry = "2558 666 618 384"
+        sizeHint = "618 384"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = INFOREFERENCE
+  }
+}
+module Info {
+  internal  {
+    frame = "177 301 112 72"
+    moduleGroupName = ""
+    windows  {
+      window _default {
+        geometry = "1939 666 618 384"
+        sizeHint = "618 384"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = INFOSOURCE
+  }
+}
+module SetWorldMatrix {
+  internal  {
+    frame = "373 333 120 56"
+    moduleGroupName = ""
+    windows  {
+      window _default {
+        geometry = "2726 165 528 355"
+        sizeHint = "471 355"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = SetWorldMatrix
+    center = "0 0 0"
+    scaleOrientation = "0 0 1 0"
+    scale = "1 1 1"
+    rotation = "0 0 1 0"
+    translation = "0 0 0"
+    sourceUsage = Ignore
+    referenceUsage = Forward
+    elementaryUsage = Ignore
+    invertResult = FALSE
+    setCInfo = FALSE
+    setTInfo = FALSE
+    setUInfo = FALSE
+  }
+}
+module itkImageFileReader {
+  internal  {
+    frame = "501 421 152 56"
+    moduleGroupName = ""
+    windows  {
+      window _default {
+        geometry = "2956 627 786 431"
+        sizeHint = "323 431"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = ReferenceImageT2FLAIR
+    fileDataType = int32
+    autoDetermineDataType = FALSE
+    correctSubVoxelShift = FALSE
+    fileDimension = 3
+    info = "Loading okay."
+    numDims = 3
+    fileType = TypeNotApplicable
+    componentType = float
+    pixelType = SCALAR
+    loaderType = NiftiImageIO
+    outputMetaDataStr = "ITK_FileNotes : FSL5.0
+aux_file : 
+bitpix : 32
+cal_max : 0
+cal_min : 0
+datatype : 16
+descrip : FSL5.0
+dim[0] : 3
+dim[1] : 176
+dim[2] : 256
+dim[3] : 256
+dim[4] : 1
+dim[5] : 1
+dim[6] : 1
+dim[7] : 1
+dim_info : 
+intent_code : 0
+intent_name : 
+intent_p1 : 0
+intent_p2 : 0
+intent_p3 : 0
+pixdim[0] : 1
+pixdim[1] : 1
+pixdim[2] : 1
+pixdim[3] : 1
+pixdim[4] : 5
+pixdim[5] : 0
+pixdim[6] : 0
+pixdim[7] : 0
+qform_code : 1
+qoffset_x : -119.331
+qoffset_y : -121.652
+qoffset_z : -137.235
+quatern_b : 0.0458373
+quatern_c : 0.083519
+quatern_d : -0.0134084
+scl_inter : 0
+scl_slope : 1
+sform_code : 1
+slice_code : 
+slice_duration : 0
+slice_end : 0
+slice_start : 0
+srow_x : 0.985694 0.034349 0.165034 -119.331
+srow_y : -0.019036 0.995438 -0.093489 -121.652
+srow_z : -0.167493 0.0890096 0.981847 -137.235
+toffset : 0
+vox_offset : 352
+xyzt_units : 
+
+"
+    suppressErrorPosting = FALSE
+    unresolvedFileName = $(DicomBrowserPath)/4_wmh_cases_collected/100152/t2_flair_3d.nii
+  }
+}
+module itkImageFileReader {
+  internal  {
+    frame = "297 429 144 56"
+    moduleGroupName = ""
+    windows  {
+      window _default {
+        geometry = "1997 634 1156 431"
+        sizeHint = "323 431"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = WMHFLAIRspaceBINMAP
+    fileDataType = int8
+    autoDetermineDataType = FALSE
+    correctSubVoxelShift = FALSE
+    fileDimension = 3
+    info = "Loading okay."
+    numDims = 3
+    fileType = TypeNotApplicable
+    componentType = double
+    pixelType = SCALAR
+    loaderType = NiftiImageIO
+    outputMetaDataStr = "ITK_FileNotes : FSL5.0
+aux_file : 
+bitpix : 64
+cal_max : 0
+cal_min : 0
+datatype : 64
+descrip : FSL5.0
+dim[0] : 3
+dim[1] : 176
+dim[2] : 256
+dim[3] : 256
+dim[4] : 1
+dim[5] : 1
+dim[6] : 1
+dim[7] : 1
+dim_info : 
+intent_code : 0
+intent_name : 
+intent_p1 : 0
+intent_p2 : 0
+intent_p3 : 0
+pixdim[0] : 1
+pixdim[1] : 1
+pixdim[2] : 1
+pixdim[3] : 1
+pixdim[4] : 0
+pixdim[5] : 0
+pixdim[6] : 0
+pixdim[7] : 0
+qform_code : 2
+qoffset_x : -121.469
+qoffset_y : -121.334
+qoffset_z : -135.06
+quatern_b : 0.0433895
+quatern_c : 0.0885091
+quatern_d : -0.0187064
+scl_inter : 0
+scl_slope : 1
+sform_code : 2
+slice_code : 
+slice_duration : 0
+slice_end : 0
+slice_start : 0
+srow_x : 0.983637 0.0449048 0.174502 -121.469
+srow_y : -0.0295434 0.995535 -0.0896525 -121.334
+srow_z : -0.177749 0.0830299 0.980567 -135.06
+toffset : 0
+vox_offset : 352
+xyzt_units : 
+
+"
+    suppressErrorPosting = FALSE
+    unresolvedFileName = $(DicomBrowserPath)/4_wmh_cases_collected/100152/100152_WMH_FLAIRspace.nii.gz
+  }
+}
+module View3D {
+  internal  {
+    frame = "929 317 144 56"
+    moduleGroupName = ""
+    windows  {
+      window _default {
+        geometry = "2356 229 1046 664"
+        sizeHint = "1046 664"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = View3D
+    autoViewAll = TRUE
+    inventorInputOn = TRUE
+    inventorOutputOn = FALSE
+    lutType = Ramp
+    currentTimePoint = 0
+    staticSamplingRate = 1
+    quality = 1
+    filterVolumeData = FilterLinear
+    lutEditorColorPoints = "[ 0 0 0 0, 4095 1 1 1 ]"
+    lutEditorAlphaPoints = "[ 0 0, 4095 1 ]"
+    lutEditorRelativeLut = FALSE
+    lutEditorColorInterpolation = InterpolateRGB
+    lutEditorAlphaFactor = 1
+    orientationProjectionType = PERSPECTIVE
+    orientationLocation = LOWER_RIGHT
+    orientationOn = TRUE
+    orientationModel = CUBE
+    greyCenter = 0.627500236034393
+    greyWidth = 0.554999947547913
+    alphaFactor = 1
+    colorFactor = "1 1 1"
+    camType = TRUE
+    camPosition = "449.693817138672 -221.456771850586 189.507537841797"
+    camOrientation = "0.67613959312439 0.450386762619019 0.583084046840668 1.51262140274048"
+    initialCameraOrientation = CAMERA_KEEP_AS_IS
+    camFar = 724.08917
+    camNear = 372.12558
+    camFocal = 547.93188
+    camHeight = 0.78539801
+    decoration = FALSE
+    hiResRendering = TRUE
+    annotations = TRUE
+    background = TRUE
+    mode = VolumeRendering
+    interactiveQuality = Medium
+  }
+  internalFields  {
+    renderer.gradientQuality = GradientQualityAutomatic
+    renderer.enhancementAlphaMix = 0.25
+    renderer.boundaryEnhancement = FALSE
+    renderer.boundaryEnhancementFactor = 1
+    renderer.boundaryEnhancementExponent = 1
+    renderer.boundaryEnhancementGradientBias = 0
+    renderer.silhouetteEnhancement = FALSE
+    renderer.silhouetteEnhancementExponent = 1
+    renderer.silhouetteEnhancementFactor = 1
+    renderer.toneShading = FALSE
+    renderer.toneShadingWarmColor = "0.67451000213623 0.533333003520966 0.141176000237465"
+    renderer.toneShadingColdColor = "0 0 0.400000005960464"
+    renderer.toneShadingWarmDiffuse = 0.60000002
+    renderer.toneShadingColdDiffuse = 0.2
+    renderer.toneShadingAngle = 45
+    renderer.materialAmbient = 0.60000002
+    renderer.materialDiffuse = 1
+    renderer.materialSpecular = 1
+    renderer.materialSpecularity = 32
+    renderer.light1Enabled = TRUE
+    renderer.light1DiffuseIntensity = 1
+    renderer.light1SpecularIntensity = 1
+    renderer.light1Color = "1 1 1"
+    renderer.light1PolarPhi = 45
+    renderer.light1PolarRho = 0
+    renderer.light2Enabled = FALSE
+    renderer.light2DiffuseIntensity = 1
+    renderer.light2SpecularIntensity = 1
+    renderer.light2Color = "1 1 1"
+    renderer.light2PolarPhi = 0
+    renderer.light2PolarRho = 0
+    renderer.light3Enabled = FALSE
+    renderer.light3DiffuseIntensity = 1
+    renderer.light3SpecularIntensity = 1
+    renderer.light3Color = "1 1 1"
+    renderer.light3PolarPhi = -45
+    renderer.light3PolarRho = 0
+    renderer.sizeOutputX = 176
+    renderer.sizeOutputY = 256
+    renderer.sizeOutputZ = 256
+    renderer.subVolumeStartX = 0
+    renderer.subVolumeStartY = 0
+    renderer.subVolumeStartZ = 0
+    renderer.subVolumeEndX = 176
+    renderer.subVolumeEndY = 256
+    renderer.subVolumeEndZ = 256
+    clip.hideGeometry = FALSE
+    clip.on = FALSE
+    clip.left = FALSE
+    clip.right = FALSE
+    clip.top = FALSE
+    clip.bottom = FALSE
+    clip.rear = FALSE
+    clip.front = FALSE
+    clip.translation0 = "1 0 0"
+    clip.translation1 = "-1 0 0"
+    clip.translation2 = "0 1 0"
+    clip.translation3 = "0 -1 0"
+    clip.translation4 = "0 0 1"
+    clip.translation5 = "0 0 -1"
+    clip.rotation0 = "0 0 0.999999940395355 1.57079994678497"
+    clip.rotation1 = "0 0 -0.999999940395355 1.57079994678497"
+    clip.rotation2 = "0 0 -1 3.1415901184082"
+    clip.rotation3 = "0 0 1 0"
+    clip.rotation4 = "-0.999999940395355 0 0 1.57079994678497"
+    clip.rotation5 = "0.999999940395355 0 0 1.57079994678497"
+  }
+}
+module View2D {
+  internal  {
+    frame = "805 317 120 56"
+    moduleGroupName = ""
+    windows  {
+      window _default {
+        geometry = "2630 410 400 400"
+        sizeHint = "400 400"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = View2D
+    inventorInputOn = TRUE
+    inventorOutputOn = FALSE
+    view2DExtensionsOn = TRUE
+    startSlice = 128
+    numSlices = 1
+    numXSlices = 1
+    sliceStep = 1
+    slab = 1
+    blendMode = BLEND_REPLACE
+    timePoint = 0
+    maxTimePoint = 0
+    filterMode = FILTER_LINEAR
+    standardKeys = TRUE
+    cineMode = CINE_ZT
+    cineDirection = CINE_FORWARD
+    cineRepeat = CINE_ONCE
+    cineSpeed = 0.1
+    cineAlwaysReset = TRUE
+    snapToCenter = TRUE
+    zoomMode = VIEW2D_AUTO_ZOOM
+    unzoomOnImageChange = FALSE
+    sliceZoom = 1
+    sliceZoomSynced = 1
+    baseColor = "1 1 1"
+    margin = "2 2"
+    sliceOrigin = "0 0"
+    useShaders = TRUE
+    useManagedInteraction = FALSE
+    lutCenter = 252
+    lutWidth = 504
+    annotationOn = TRUE
+    annotationMode = ANNO_MODE_AUTO
+    annotationSizeMode = ANNO_SHOW_DETAILED
+    annotationCol = "0.899999976158142 0.899999976158142 0.899999976158142"
+    annotationFontSize = ANNO_SIZE_AUTO
+    annoCoords = Voxel
+    annoCTValue = AsIs
+    borderOn = FALSE
+    borderColor = "0.899999976158142 0.899999976158142 0.899999976158142"
+    valueHighPrecision = TRUE
+    showColorChannelValues = FALSE
+    colorChannelSeparator = " / "
+    maxPrecision = 4
+    enableSlicing = TRUE
+    useRelativeLUTIfNoInputImage = TRUE
+    hiResRendering = TRUE
+  }
+}
+module View3D {
+  internal  {
+    frame = "33 309 144 56"
+    moduleGroupName = ""
+    windows  {
+      window _default {
+        geometry = "2356 229 1046 664"
+        sizeHint = "1046 664"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = View3D1
+    autoViewAll = TRUE
+    inventorInputOn = TRUE
+    inventorOutputOn = FALSE
+    lutType = Ramp
+    currentTimePoint = 0
+    staticSamplingRate = 1
+    quality = 1
+    filterVolumeData = FilterLinear
+    lutEditorColorPoints = "[ 0 0 0 0, 4095 1 1 1 ]"
+    lutEditorAlphaPoints = "[ 0 0, 4095 1 ]"
+    lutEditorRelativeLut = FALSE
+    lutEditorColorInterpolation = InterpolateRGB
+    lutEditorAlphaFactor = 1
+    orientationProjectionType = PERSPECTIVE
+    orientationLocation = LOWER_RIGHT
+    orientationOn = TRUE
+    orientationModel = CUBE
+    greyCenter = 0.5
+    greyWidth = 0.5
+    alphaFactor = 1
+    colorFactor = "1 1 1"
+    camType = TRUE
+    camPosition = "260.64794921875 -406.217132568359 173.480850219727"
+    camOrientation = "0.888796508312225 0.43454372882843 0.145645529031754 1.21460700035095"
+    initialCameraOrientation = CAMERA_KEEP_AS_IS
+    camFar = 720.74622
+    camNear = 336.02283
+    camFocal = 528.19269
+    camHeight = 0.78539801
+    decoration = FALSE
+    hiResRendering = TRUE
+    annotations = TRUE
+    background = TRUE
+    mode = VolumeRendering
+    interactiveQuality = Medium
+  }
+  internalFields  {
+    renderer.gradientQuality = GradientQualityAutomatic
+    renderer.enhancementAlphaMix = 0.25
+    renderer.boundaryEnhancement = FALSE
+    renderer.boundaryEnhancementFactor = 1
+    renderer.boundaryEnhancementExponent = 1
+    renderer.boundaryEnhancementGradientBias = 0
+    renderer.silhouetteEnhancement = FALSE
+    renderer.silhouetteEnhancementExponent = 1
+    renderer.silhouetteEnhancementFactor = 1
+    renderer.toneShading = FALSE
+    renderer.toneShadingWarmColor = "0.67451000213623 0.533333003520966 0.141176000237465"
+    renderer.toneShadingColdColor = "0 0 0.400000005960464"
+    renderer.toneShadingWarmDiffuse = 0.60000002
+    renderer.toneShadingColdDiffuse = 0.2
+    renderer.toneShadingAngle = 45
+    renderer.materialAmbient = 0.60000002
+    renderer.materialDiffuse = 1
+    renderer.materialSpecular = 1
+    renderer.materialSpecularity = 32
+    renderer.light1Enabled = TRUE
+    renderer.light1DiffuseIntensity = 1
+    renderer.light1SpecularIntensity = 1
+    renderer.light1Color = "1 1 1"
+    renderer.light1PolarPhi = 45
+    renderer.light1PolarRho = 0
+    renderer.light2Enabled = FALSE
+    renderer.light2DiffuseIntensity = 1
+    renderer.light2SpecularIntensity = 1
+    renderer.light2Color = "1 1 1"
+    renderer.light2PolarPhi = 0
+    renderer.light2PolarRho = 0
+    renderer.light3Enabled = FALSE
+    renderer.light3DiffuseIntensity = 1
+    renderer.light3SpecularIntensity = 1
+    renderer.light3Color = "1 1 1"
+    renderer.light3PolarPhi = -45
+    renderer.light3PolarRho = 0
+    renderer.sizeOutputX = 176
+    renderer.sizeOutputY = 256
+    renderer.sizeOutputZ = 256
+    renderer.subVolumeStartX = 0
+    renderer.subVolumeStartY = 0
+    renderer.subVolumeStartZ = 0
+    renderer.subVolumeEndX = 176
+    renderer.subVolumeEndY = 256
+    renderer.subVolumeEndZ = 256
+    clip.hideGeometry = FALSE
+    clip.on = FALSE
+    clip.left = FALSE
+    clip.right = FALSE
+    clip.top = FALSE
+    clip.bottom = FALSE
+    clip.rear = FALSE
+    clip.front = FALSE
+    clip.translation0 = "1 0 0"
+    clip.translation1 = "-1 0 0"
+    clip.translation2 = "0 1 0"
+    clip.translation3 = "0 -1 0"
+    clip.translation4 = "0 0 1"
+    clip.translation5 = "0 0 -1"
+    clip.rotation0 = "0 0 0.999999940395355 1.57079994678497"
+    clip.rotation1 = "0 0 -0.999999940395355 1.57079994678497"
+    clip.rotation2 = "0 0 -1 3.1415901184082"
+    clip.rotation3 = "0 0 1 0"
+    clip.rotation4 = "-0.999999940395355 0 0 1.57079994678497"
+    clip.rotation5 = "0.999999940395355 0 0 1.57079994678497"
+  }
+}
+module View2D {
+  internal  {
+    frame = "-91 309 120 56"
+    moduleGroupName = ""
+    windows  {
+      window _default {
+        geometry = "2679 361 400 400"
+        sizeHint = "400 400"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = View2D1
+    inventorInputOn = TRUE
+    inventorOutputOn = FALSE
+    view2DExtensionsOn = TRUE
+    startSlice = 128
+    numSlices = 1
+    numXSlices = 1
+    sliceStep = 1
+    slab = 1
+    blendMode = BLEND_REPLACE
+    timePoint = 0
+    maxTimePoint = 0
+    filterMode = FILTER_LINEAR
+    standardKeys = TRUE
+    cineMode = CINE_ZT
+    cineDirection = CINE_FORWARD
+    cineRepeat = CINE_ONCE
+    cineSpeed = 0.1
+    cineAlwaysReset = TRUE
+    snapToCenter = TRUE
+    zoomMode = VIEW2D_AUTO_ZOOM
+    unzoomOnImageChange = FALSE
+    sliceZoom = 1
+    sliceZoomSynced = 1
+    baseColor = "1 1 1"
+    margin = "2 2"
+    sliceOrigin = "0 0"
+    useShaders = TRUE
+    useManagedInteraction = FALSE
+    lutCenter = 0.5
+    lutWidth = 1
+    annotationOn = TRUE
+    annotationMode = ANNO_MODE_AUTO
+    annotationSizeMode = ANNO_SHOW_DETAILED
+    annotationCol = "0.899999976158142 0.899999976158142 0.899999976158142"
+    annotationFontSize = ANNO_SIZE_AUTO
+    annoCoords = Voxel
+    annoCTValue = AsIs
+    borderOn = FALSE
+    borderColor = "0.899999976158142 0.899999976158142 0.899999976158142"
+    valueHighPrecision = TRUE
+    showColorChannelValues = FALSE
+    colorChannelSeparator = " / "
+    maxPrecision = 4
+    enableSlicing = TRUE
+    useRelativeLUTIfNoInputImage = TRUE
+    hiResRendering = TRUE
+  }
+}
+module Info {
+  internal  {
+    frame = "485 173 136 72"
+    moduleGroupName = ""
+    windows  {
+      window _default {
+        geometry = "3179 665 618 384"
+        sizeHint = "618 384"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = INFOCORRECTED
+  }
+}
+module SynchroView2D {
+  internal  {
+    frame = "625 181 128 56"
+    moduleGroupName = ""
+    windows  {
+      window _default {
+        geometry = "2947 228 804 400"
+        sizeHint = "804 400"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = SynchroView2D
+    leftInventorInputOn = FALSE
+    rightInventorInputOn = FALSE
+    synchSlicing = TRUE
+    synchZooming = TRUE
+    synchTiming = TRUE
+    synchLUTs = FALSE
+    disconnectOnHide = TRUE
+    hiResRendering = FALSE
+    snapToCenter1 = FALSE
+    snapToCenter2 = FALSE
+    slice1 = 156
+    timepoint1 = 0
+    filterMode = FILTER_LINEAR
+    slice2 = 156
+    timepoint2 = 0
+    lut1w = 1
+    lut1c = 0.5
+    lut2w = 790
+    lut2c = 395
+    annotationColor = "0.899999976158142 0.899999976158142 0.899999976158142"
+    borderOn = FALSE
+    drawCurrentPos = FALSE
+    showCurrentPos = FALSE
+    worldPosition = "-21.8003387451172 -4.3472900390625 45.518928527832"
+    background = "0 0 0"
+  }
+}
+connections  {
+  NIFTIOUTPUT.input0 = SetWorldMatrix.output0
+  INFOREFERENCE.input0 = ReferenceImageT2FLAIR.output0
+  INFOSOURCE.input0 = WMHFLAIRspaceBINMAP.output0
+  SetWorldMatrix.input0 = WMHFLAIRspaceBINMAP.output0
+  SetWorldMatrix.input1 = ReferenceImageT2FLAIR.output0
+  View3D.inImage = ReferenceImageT2FLAIR.output0
+  View2D.inImage = ReferenceImageT2FLAIR.output0
+  View3D1.inImage = WMHFLAIRspaceBINMAP.output0
+  View2D1.inImage = WMHFLAIRspaceBINMAP.output0
+  INFOCORRECTED.input0 = SetWorldMatrix.output0
+  SynchroView2D.inImage1 = SetWorldMatrix.output0
+  SynchroView2D.inImage2 = ReferenceImageT2FLAIR.output0
+}
+networkModel = ""
