@@ -1,0 +1,1194 @@
+// MDL v1 utf8
+network  {
+  watchlist = ""
+}
+module itkImageFileWriter {
+  internal  {
+    frame = "385 57 192 72"
+    moduleGroupName = "UBO world matrix fix:"
+    windows  {
+      window _default {
+        geometry = "714 595 1011 418"
+        sizeHint = "293 418"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = SAVE_WMH_MAP_UBO_FIX
+    useCompression = FALSE
+    correctSubVoxelShift = FALSE
+    forceDirectionCosineWrite = TRUE
+    outputVoxelType = Automatic
+    info = "File saved successfully"
+    unresolvedFileName = $(DicomBrowserPath)/4_wmh_cases_collected/100152/UBO_wmh_map_fix.nii.gz
+  }
+}
+module RunPythonScript {
+  internal  {
+    frame = "1273 461 128 56"
+    moduleGroupName = "Code: HERE!"
+    windows  {
+      window _default {
+        geometry = "2864 45 976 1035"
+        sizeHint = "813 798"
+        wasOpen = yes
+      }
+    }
+  }
+  fields  {
+    instanceName = RunPythonScript
+    in0 = ""
+    in1 = ""
+    in2 = ""
+    in3 = ""
+    in4 = ""
+    in5 = ""
+    in6 = ""
+    in7 = ""
+    in8 = ""
+    in9 = ""
+    inComment0 = in0
+    inComment1 = in1
+    inComment2 = in2
+    inComment3 = in3
+    inComment4 = in4
+    inComment5 = in5
+    inComment6 = in6
+    inComment7 = in7
+    inComment8 = in8
+    inComment9 = in9
+    autoApply0 = TRUE
+    autoApply1 = TRUE
+    autoApply2 = TRUE
+    autoApply3 = TRUE
+    autoApply4 = TRUE
+    autoApply5 = TRUE
+    autoApply6 = TRUE
+    autoApply7 = TRUE
+    autoApply8 = TRUE
+    autoApply9 = TRUE
+    out0 = ""
+    out1 = ""
+    out2 = ""
+    out3 = ""
+    out4 = ""
+    out5 = ""
+    out6 = ""
+    out7 = ""
+    out8 = ""
+    out9 = ""
+    outComment0 = out0
+    outComment1 = out1
+    outComment2 = out2
+    outComment3 = out3
+    outComment4 = out4
+    outComment5 = out5
+    outComment6 = out6
+    outComment7 = out7
+    outComment8 = out8
+    outComment9 = out9
+    initCode = "*# Initialize global variables and functions
+global CTX
+# Use this to access the network context
+CTX=RunPythonScript_ctx.owner().owner()
+
+#######
+#Please take a short look through the code to ensure that everything matches with your own files.
+#######
+
+#Imports:
+import os
+
+##Remember to comment out paths before uploading to GitHub... (Since "init code" is run on start-up.)
+base_input_path = "/Users/lhi003/Documents/4_wmh_cases_collected/" #USER ADVISED TO DOUBLE CHECK.
+base_summary_path = "/Users/lhi003/Documents/4_wmh_cases_collected_other/" #USER ADVISED TO DOUBLE CHECK.
+
+##Threshold number to binarize a Probability Lesion map, 
+## if it is already thresholded then that value will override whatever value is specified here.
+LPA_threshold = 0.05 #USER ADVISED TO DOUBLE CHECK. (Assume 0 -> 1)
+CTX.field("Threshold_LPA_PMAP.threshold").value = LPA_threshold
+
+##STRUCTURE:
+#Assuming using the structure from the LPA run, which loosely follows the BIDS structure:
+# (e.g. [ID]/*/[images].nii.gz or [ID]/[images].nii.gz)
+
+##INPUTS:
+#T2 FLAIR (t2_flair_3d.nii) image should be the reference image read in at T2_FLAIR module.
+#The [ID]_FLAIRspace.nii.gz files should be the source image read in at WMH_MAP_UBO.
+
+#Setting up: (To ensure that the correct files are selected before committing to running code.)
+print "="*10
+print "Retrieving IDs from: " + base_input_path
+print "Saving volume information to: " + base_summary_path
+print "="*10
+
+id_list = os.listdir(base_input_path)
+id_list = [x for x in id_list if not (x.startswith("."))] #Omitting hidden files that start with "." typically present in macOS.
+
+n = len(id_list)
+counter = 1
+
+summary_list = []
+
+print(id_list)
+print "Total number of IDs are: " + str(n)
+print "LPA PMAP threshold is set to be " + str(LPA_threshold)
+
+print "Ready to begin execution of Main code..."
+print "="*10*"
+    wakeUpCode = ""
+    code = "*
+###Iterating through all IDs:
+for i in id_list:
+	print "="*10
+	print "Working at number: " + str(counter) + " of " + str(n)
+	print "Current ID is: " + i
+	
+	##Paths:
+	#Constructing current ID path:
+	current_id_path = base_input_path + i + "/"
+	print(current_id_path)
+	
+	#Constructing (source) WMH_MAP_UBO input path:
+	ubo_path = current_id_path + i + "_WMH_FLAIRspace.nii.gz" #USER ADVISED TO DOUBLE CHECK.
+	print(ubo_path)
+	
+	#Constructing (reference) T2_FLAIR input path:
+	flair_path = current_id_path + "t2_flair_3d.nii" #USER ADVISED TO DOUBLE CHECK.
+	print(flair_path)
+	
+	#Constructing WMH_PMAP_LPA input path:
+	lpa_path = current_id_path + "ples_lpa_mt2_flair_3d.nii" #USER ADVISED TO DOUBLE CHECK.
+	print(lpa_path)
+	
+	##There should be no need to make new output directories, but we will specify the out paths.
+	#ID neutral output names/paths are enforced similarly to other BIDS elements.
+	
+	#Constructing WMH_MAP_UBO fix output path:
+	fixed_ubo_path = current_id_path + "UBO_wmh_map_fix.nii.gz" 
+	print(fixed_ubo_path)
+	if not os.path.isfile(fixed_ubo_path):
+		print "A new UBO WMH map fix file will saved."
+	else:
+		print "A previous UBO WMH map file exists and will be overwritten."
+	
+	#Constructing THRESHOLD_LPA_PMAP output path:
+	threshold_lpa_path = current_id_path + "LPA_wmh_map.nii.gz"
+	print(threshold_lpa_path)
+	if not os.path.isfile(threshold_lpa_path):
+		print "A new LPA WMH map file will saved."
+	else:
+		print "A previous LPA WMH map file exists and will be overwritten."
+	
+	#Constructing OR_UBO_LPA_BIN_MASK output path:
+	or_ubo_lpa_path = current_id_path + "OR_UBO_LPA_wmh_map.nii.gz"
+	print(or_ubo_lpa_path)
+	if not os.path.isfile(or_ubo_lpa_path):
+		print "A new OR_UBO_LPA WMH map file will saved."
+	else:
+		print "A previous OR_UBO_LPA WMH map file exists and will be overwritten."
+	
+	###Paths should be ready by now; proceed to insert into context fields.
+	
+	##Read in the files:
+	#Source: WMH_UBO_MAP
+	CTX.field("WMH_MAP_UBO.unresolvedFileName").value = ubo_path
+	
+	#Reference: T2_FLAIR
+	CTX.field("T2_FLAIR.unresolvedFileName").value = flair_path
+	
+	#WMH_PMAP_LPA
+	CTX.field("WMH_PMAP_LPA.unresolvedFileName").value = lpa_path
+	
+	##Mask volumes: (Write to csv along ID??)
+	ubo_fix_volume = CTX.field("CalculateVolume_UBO.totalVolume").value
+	print "UBO volume is: " + str(ubo_fix_volume)
+	
+	lpa_thresh_volume = CTX.field("CalculateVolume_LPA.totalVolume").value
+	print "LPA volume is: " + str(lpa_thresh_volume)
+	
+	or_ubo_lpa_volume = CTX.field("CalculateVolume_UBOLPA.totalVolume").value
+	print "UBO or LPA volume is: " + str(or_ubo_lpa_volume)
+	
+	###Saves and other potential relevant logical tests:
+	##UBO world matrix fix:
+	#Get values from INFO_WMH_MAP_UBO_FIX and INFO_T2_FLAIR and compare their "World Matrix" as a security check.
+	if (CTX.field("INFO_WMH_MAP_UBO_FIX.worldMatrix").value != CTX.field("INFO_T2_FLAIR.worldMatrix").value):
+		print "WARNING! The world matrices differ!!! They should be equal..."
+		print "CHECK!"*20
+	else:
+		#Save UBO fix if equal world matrices.
+		CTX.field("SAVE_WMH_MAP_UBO_FIX.unresolvedFileName").value = fixed_ubo_path
+		CTX.field("SAVE_WMH_MAP_UBO_FIX.save").touch()
+		print("Current ID's UBO WMH map has been fixed and saved...")
+	
+	#Save LPA threshold:
+	CTX.field("SAVE_THRESHOLD_LPA_PMAP.unresolvedFileName").value = threshold_lpa_path
+	CTX.field("SAVE_THRESHOLD_LPA_PMAP.save").touch()
+	print("Current ID's thresholded LPA WMH map has been saved...")
+	
+	#Save OR_UBO_LPA:
+	CTX.field("SAVE_OR_UBO_LPA_BIN_MASK.unresolvedFileName").value = or_ubo_lpa_path
+	CTX.field("SAVE_OR_UBO_LPA_BIN_MASK.save").touch()
+	print("Current ID's joint OR_UBO_LPA WMH map has been saved...")
+	
+	#Append to summary_list:
+	summary_list.append([i,ubo_fix_volume,lpa_thresh_volume,or_ubo_lpa_volume])
+	
+	#Count iterations:
+	counter = counter + 1
+	
+	
+	
+print("Finished...")
+print "="*10*"
+    finalizeCode = "*print "="*10
+import csv	
+
+csv_file = "wmh_volume_id_ubo_lpa_both.csv"
+
+csv_path = base_summary_path + csv_file
+
+print("Writing to csv...")
+with open(csv_path,"w") as output:
+	writer = csv.writer(output, lineterminator="\\n")
+	writer.writerows(summary_list)
+	
+print "Look for output at: " + str(csv_path)
+print("Finished with csv...")
+print "="*10
+
+
+
+
+
+
+*"
+    showFields = FALSE
+    showInitCode = TRUE
+    showWakeUpCode = FALSE
+    showCode = TRUE
+    showFinalizeCode = TRUE
+    showConsole = FALSE
+  }
+}
+module Info {
+  internal  {
+    frame = "877 461 120 72"
+    moduleGroupName = Inputs:
+    windows  {
+      window _default {
+        geometry = "674 765 618 384"
+        sizeHint = "618 384"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = INFO_T2_FLAIR
+  }
+}
+module Info {
+  internal  {
+    frame = "673 461 160 72"
+    moduleGroupName = Inputs:
+    windows  {
+      window _default {
+        geometry = "290 698 599 401"
+        sizeHint = "599 401"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = INFO_WMH_MAP_UBO
+  }
+}
+module SetWorldMatrix {
+  internal  {
+    frame = "477 169 200 72"
+    moduleGroupName = "UBO world matrix fix:"
+    windows  {
+      window _default {
+        geometry = "1056 668 528 355"
+        sizeHint = "471 355"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = FORWARD_REF_TO_SOURCE
+    center = "0 0 0"
+    scaleOrientation = "0 0 1 0"
+    scale = "1 1 1"
+    rotation = "0 0 1 0"
+    translation = "0 0 0"
+    sourceUsage = Ignore
+    referenceUsage = Forward
+    elementaryUsage = Ignore
+    invertResult = FALSE
+    setCInfo = FALSE
+    setTInfo = FALSE
+    setUInfo = FALSE
+  }
+}
+module itkImageFileReader {
+  internal  {
+    frame = "877 561 144 72"
+    moduleGroupName = Inputs:
+    windows  {
+      window _default {
+        geometry = "1337 634 394 431"
+        sizeHint = "323 431"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = T2_FLAIR
+    fileDataType = float
+    autoDetermineDataType = TRUE
+    correctSubVoxelShift = FALSE
+    fileDimension = 3
+    info = "Loading okay."
+    numDims = 3
+    fileType = TypeNotApplicable
+    componentType = float
+    pixelType = SCALAR
+    loaderType = NiftiImageIO
+    outputMetaDataStr = "ITK_FileNotes : FSL5.0
+aux_file : 
+bitpix : 32
+cal_max : 0
+cal_min : 0
+datatype : 16
+descrip : FSL5.0
+dim[0] : 3
+dim[1] : 176
+dim[2] : 256
+dim[3] : 256
+dim[4] : 1
+dim[5] : 1
+dim[6] : 1
+dim[7] : 1
+dim_info : 
+intent_code : 0
+intent_name : 
+intent_p1 : 0
+intent_p2 : 0
+intent_p3 : 0
+pixdim[0] : 1
+pixdim[1] : 1
+pixdim[2] : 1
+pixdim[3] : 1
+pixdim[4] : 5
+pixdim[5] : 0
+pixdim[6] : 0
+pixdim[7] : 0
+qform_code : 1
+qoffset_x : -119.331
+qoffset_y : -121.652
+qoffset_z : -137.235
+quatern_b : 0.0458373
+quatern_c : 0.083519
+quatern_d : -0.0134084
+scl_inter : 0
+scl_slope : 1
+sform_code : 1
+slice_code : 
+slice_duration : 0
+slice_end : 0
+slice_start : 0
+srow_x : 0.985694 0.034349 0.165034 -119.331
+srow_y : -0.019036 0.995438 -0.093489 -121.652
+srow_z : -0.167493 0.0890096 0.981847 -137.235
+toffset : 0
+vox_offset : 352
+xyzt_units : 
+
+"
+    suppressErrorPosting = FALSE
+    unresolvedFileName = $(DicomBrowserPath)/4_wmh_cases_collected/100152/t2_flair_3d.nii
+  }
+}
+module itkImageFileReader {
+  internal  {
+    frame = "693 561 144 72"
+    moduleGroupName = Inputs:
+    windows  {
+      window _default {
+        geometry = "1509 636 411 431"
+        sizeHint = "323 431"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = WMH_MAP_UBO
+    fileDataType = double
+    autoDetermineDataType = TRUE
+    correctSubVoxelShift = FALSE
+    fileDimension = 3
+    info = "Loading okay."
+    numDims = 3
+    fileType = TypeNotApplicable
+    componentType = double
+    pixelType = SCALAR
+    loaderType = NiftiImageIO
+    outputMetaDataStr = "ITK_FileNotes : FSL5.0
+aux_file : 
+bitpix : 64
+cal_max : 0
+cal_min : 0
+datatype : 64
+descrip : FSL5.0
+dim[0] : 3
+dim[1] : 176
+dim[2] : 256
+dim[3] : 256
+dim[4] : 1
+dim[5] : 1
+dim[6] : 1
+dim[7] : 1
+dim_info : 
+intent_code : 0
+intent_name : 
+intent_p1 : 0
+intent_p2 : 0
+intent_p3 : 0
+pixdim[0] : 1
+pixdim[1] : 1
+pixdim[2] : 1
+pixdim[3] : 1
+pixdim[4] : 0
+pixdim[5] : 0
+pixdim[6] : 0
+pixdim[7] : 0
+qform_code : 2
+qoffset_x : -121.469
+qoffset_y : -121.334
+qoffset_z : -135.06
+quatern_b : 0.0433895
+quatern_c : 0.0885091
+quatern_d : -0.0187064
+scl_inter : 0
+scl_slope : 1
+sform_code : 2
+slice_code : 
+slice_duration : 0
+slice_end : 0
+slice_start : 0
+srow_x : 0.983637 0.0449048 0.174502 -121.469
+srow_y : -0.0295434 0.995535 -0.0896525 -121.334
+srow_z : -0.177749 0.0830299 0.980567 -135.06
+toffset : 0
+vox_offset : 352
+xyzt_units : 
+
+"
+    suppressErrorPosting = FALSE
+    unresolvedFileName = $(DicomBrowserPath)/4_wmh_cases_collected/100152/100152_WMH_FLAIRspace.nii.gz
+  }
+}
+module Info {
+  internal  {
+    frame = "589 57 184 72"
+    moduleGroupName = "UBO world matrix fix:"
+    windows  {
+      window _default {
+        geometry = "683 348 618 384"
+        sizeHint = "618 384"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = INFO_WMH_MAP_UBO_FIX
+  }
+}
+module itkImageFileReader {
+  internal  {
+    frame = "1061 561 144 72"
+    moduleGroupName = Inputs:
+    windows  {
+      window _default {
+        geometry = "1213 346 707 431"
+        sizeHint = "323 431"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = WMH_PMAP_LPA
+    fileDataType = float
+    autoDetermineDataType = TRUE
+    correctSubVoxelShift = FALSE
+    fileDimension = 3
+    info = "Loading okay."
+    numDims = 3
+    fileType = TypeNotApplicable
+    componentType = float
+    pixelType = SCALAR
+    loaderType = NiftiImageIO
+    outputMetaDataStr = "ITK_FileNotes : Probability lesion map obtained by LPA within LST toolbox
+aux_file : 
+bitpix : 32
+cal_max : 0
+cal_min : 0
+datatype : 16
+descrip : Probability lesion map obtained by LPA within LST toolbox
+dim[0] : 3
+dim[1] : 176
+dim[2] : 256
+dim[3] : 256
+dim[4] : 1
+dim[5] : 1
+dim[6] : 1
+dim[7] : 1
+dim_info : 
+intent_code : 0
+intent_name : 
+intent_p1 : 0
+intent_p2 : 0
+intent_p3 : 0
+pixdim[0] : 1
+pixdim[1] : 1
+pixdim[2] : 1
+pixdim[3] : 1
+pixdim[4] : 0
+pixdim[5] : 0
+pixdim[6] : 0
+pixdim[7] : 0
+qform_code : 2
+qoffset_x : -119.331
+qoffset_y : -121.652
+qoffset_z : -137.235
+quatern_b : 0.0458372
+quatern_c : 0.083519
+quatern_d : -0.0134084
+scl_inter : 0
+scl_slope : 1
+sform_code : 2
+slice_code : 
+slice_duration : 0
+slice_end : 0
+slice_start : 0
+srow_x : 0.985694 0.034349 0.165034 -119.331
+srow_y : -0.0190361 0.995438 -0.0934889 -121.652
+srow_z : -0.167493 0.0890095 0.981847 -137.235
+toffset : 0
+vox_offset : 352
+xyzt_units : 
+
+"
+    suppressErrorPosting = FALSE
+    unresolvedFileName = $(DicomBrowserPath)/4_wmh_cases_collected/100152/ples_lpa_mt2_flair_3d.nii
+  }
+}
+module Info {
+  internal  {
+    frame = "1037 469 168 72"
+    moduleGroupName = Inputs:
+    windows  {
+      window _default {
+        geometry = "55 777 618 384"
+        sizeHint = "618 384"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = INFO_WMH_PMAP_LPA
+  }
+}
+module Threshold {
+  internal  {
+    frame = "1211 -230 160 88"
+    moduleGroupName = "Intermediate calculations:"
+    showNetworkPanel = true
+    windows  {
+      window _default {
+        geometry = "2736 490 312 292"
+        sizeHint = "274 292"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = Threshold_LPA_PMAP
+    threshold = 0.05
+    relativeThreshold = FALSE
+    comparisonOperator = GreaterEqual
+    conditionTrueWriteValue = UserDef
+    userConditionTrueValue = 1
+    conditionFalseWriteValue = UserDef
+    userConditionFalseValue = 0
+  }
+}
+module SynchroView2D {
+  internal  {
+    frame = "1033 -328 184 72"
+    moduleGroupName = "Intermediate calculations:"
+    windows  {
+      window _default {
+        geometry = "2477 361 804 400"
+        sizeHint = "804 400"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = SYNC_2D_VIEW_LPA_MOD
+    leftInventorInputOn = FALSE
+    rightInventorInputOn = FALSE
+    synchSlicing = TRUE
+    synchZooming = TRUE
+    synchTiming = TRUE
+    synchLUTs = FALSE
+    disconnectOnHide = TRUE
+    hiResRendering = FALSE
+    snapToCenter1 = FALSE
+    snapToCenter2 = FALSE
+    slice1 = 162
+    timepoint1 = 0
+    filterMode = FILTER_LINEAR
+    slice2 = 162
+    timepoint2 = 0
+    lut1w = 0.970340728759766
+    lut1c = 0.485170364379883
+    lut2w = 1
+    lut2c = 0.5
+    annotationColor = "0.899999976158142 0.899999976158142 0.899999976158142"
+    borderOn = FALSE
+    drawCurrentPos = FALSE
+    showCurrentPos = FALSE
+    worldPosition = "-8.59580993652344 14.0424690246582 85.9715423583984"
+    background = "0 0 0"
+  }
+}
+module Info {
+  internal  {
+    frame = "1061 -448 208 72"
+    moduleGroupName = "Intermediate calculations:"
+    windows  {
+      window _default {
+        geometry = "1302 776 618 384"
+        sizeHint = "618 384"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = INFO_THRESHOLD_LPA_PMAP
+  }
+}
+module CalculateVolume {
+  internal  {
+    frame = "485 -811 192 88"
+    moduleGroupName = "Volume calculations:"
+    showNetworkPanel = true
+    windows  {
+      window _default {
+        geometry = "765 506 382 261"
+        sizeHint = "382 261"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = CalculateVolume_UBO
+    minMode = UserDefined
+    intMin = 0.5
+    maxMode = UserDefined
+    intMax = 1
+    autoUpdate = TRUE
+    unit = Voxels
+    factor = 1
+    userTimepoint = 0
+    curveType = Line
+    curveStyle = 0
+  }
+}
+module Arithmetic2 {
+  internal  {
+    frame = "1453 -472 176 88"
+    moduleGroupName = "Intermediate calculations:"
+    showNetworkPanel = true
+    windows  {
+      window _default {
+        geometry = "2686 515 392 93"
+        sizeHint = "387 93"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = OR_UBO_LPA_BIN_MASK
+    function = Or
+    outputImageSize = InvalidateOutputIfSizesDiffer
+    constant = 0
+    autoReplicate = FALSE
+  }
+}
+module CalculateVolume {
+  internal  {
+    frame = "693 -811 192 88"
+    moduleGroupName = "Volume calculations:"
+    showNetworkPanel = true
+    windows  {
+      window _default {
+        geometry = "1259 484 382 261"
+        sizeHint = "382 261"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = CalculateVolume_LPA
+    minMode = UserDefined
+    intMin = 0.5
+    maxMode = UserDefined
+    intMax = 1
+    autoUpdate = TRUE
+    unit = Voxels
+    factor = 1
+    userTimepoint = 0
+    curveType = Line
+    curveStyle = 0
+  }
+}
+module CalculateVolume {
+  internal  {
+    frame = "897 -811 216 88"
+    moduleGroupName = "Volume calculations:"
+    showNetworkPanel = true
+    windows  {
+      window _default {
+        geometry = "1198 459 382 261"
+        sizeHint = "382 261"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = CalculateVolume_UBOLPA
+    minMode = UserDefined
+    intMin = 0.5
+    maxMode = UserDefined
+    intMax = 1
+    autoUpdate = TRUE
+    unit = Voxels
+    factor = 1
+    userTimepoint = 0
+    curveType = Line
+    curveStyle = 0
+  }
+}
+module Info {
+  internal  {
+    frame = "1629 -456 208 72"
+    moduleGroupName = "Intermediate calculations:"
+    windows  {
+      window _default {
+        geometry = "1302 327 618 405"
+        sizeHint = "618 384"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = INFO_OR_UBO_LPA_BIN_MASK
+  }
+}
+module itkImageFileWriter {
+  internal  {
+    frame = "1425 -875 208 72"
+    moduleGroupName = "Save remaining 2 masks:"
+    windows  {
+      window _default {
+        geometry = "1156 416 764 418"
+        sizeHint = "293 418"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = SAVE_THRESHOLD_LPA_PMAP
+    useCompression = FALSE
+    correctSubVoxelShift = FALSE
+    forceDirectionCosineWrite = TRUE
+    outputVoxelType = Automatic
+    info = "File saved successfully"
+    unresolvedFileName = $(DicomBrowserPath)/4_wmh_cases_collected/100152/LPA_wmh_map.nii.gz
+  }
+}
+module itkImageFileWriter {
+  internal  {
+    frame = "1669 -875 216 72"
+    moduleGroupName = "Save remaining 2 masks:"
+    windows  {
+      window _default {
+        geometry = "2733 352 359 418"
+        sizeHint = "293 418"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = SAVE_OR_UBO_LPA_BIN_MASK
+    useCompression = FALSE
+    correctSubVoxelShift = FALSE
+    forceDirectionCosineWrite = TRUE
+    outputVoxelType = Automatic
+    info = "File saved successfully"
+    unresolvedFileName = $(DicomBrowserPath)/4_wmh_cases_collected/100152/OR_UBO_LPA_wmh_map.nii.gz
+  }
+}
+connections  {
+  SAVE_WMH_MAP_UBO_FIX.input0 = FORWARD_REF_TO_SOURCE.output0
+  INFO_T2_FLAIR.input0 = T2_FLAIR.output0
+  INFO_WMH_MAP_UBO.input0 = WMH_MAP_UBO.output0
+  FORWARD_REF_TO_SOURCE.input0 = WMH_MAP_UBO.output0
+  FORWARD_REF_TO_SOURCE.input1 = T2_FLAIR.output0
+  INFO_WMH_MAP_UBO_FIX.input0 = FORWARD_REF_TO_SOURCE.output0
+  INFO_WMH_PMAP_LPA.input0 = WMH_PMAP_LPA.output0
+  Threshold_LPA_PMAP.input0 = WMH_PMAP_LPA.output0
+  SYNC_2D_VIEW_LPA_MOD.inImage1 = WMH_PMAP_LPA.output0
+  SYNC_2D_VIEW_LPA_MOD.inImage2 = Threshold_LPA_PMAP.output0
+  INFO_THRESHOLD_LPA_PMAP.input0 = Threshold_LPA_PMAP.output0
+  CalculateVolume_UBO.input0 = FORWARD_REF_TO_SOURCE.output0
+  OR_UBO_LPA_BIN_MASK.input0 = FORWARD_REF_TO_SOURCE.output0
+  OR_UBO_LPA_BIN_MASK.input1 = Threshold_LPA_PMAP.output0
+  CalculateVolume_LPA.input0 = Threshold_LPA_PMAP.output0
+  CalculateVolume_UBOLPA.input0 = OR_UBO_LPA_BIN_MASK.output0
+  INFO_OR_UBO_LPA_BIN_MASK.input0 = OR_UBO_LPA_BIN_MASK.output0
+  SAVE_THRESHOLD_LPA_PMAP.input0 = Threshold_LPA_PMAP.output0
+  SAVE_OR_UBO_LPA_BIN_MASK.input0 = OR_UBO_LPA_BIN_MASK.output0
+}
+networkModel  {
+  parentItems  {
+    0  {
+      MLABNetworkModelItem MLABNetworkModelItemGroup {
+        uniqueId = 17
+        objectName = "UBO world matrix fix:"
+        parentUniqueId = 0
+        color  {
+          r = 59
+          g = 142
+          b = 123
+          a = 40
+        }
+      }
+      MLABNetworkModelItem MLABNoteItem {
+        uniqueId = 68
+        objectName = ""
+        parentUniqueId = 17
+        frame = "793 53 200 200"
+        backgroundColor  {
+          r = 247
+          g = 221
+          b = 91
+          a = 255
+        }
+        text = "This part is only to ensure that the world matrix in WMH_MAP_UBO from the UBO Detector algorithm is the same as T2_FLAIR and WMH_PMAP_LPA."
+        richText = "*<html>
+  <head>
+    <style type="text/css">
+      a.headerlink {
+        visibility: hidden;
+      }
+      table {
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <body>
+
+  <p>This part is only to ensure that the world matrix in WMH_MAP_UBO from the UBO Detector algorithm is the same as T2_FLAIR and WMH_PMAP_LPA.</p>
+
+
+  </body>
+</html>*"
+        titleText = Note:
+        isCollapsed = False
+        drawAsComment = False
+        titleFrame = "798 58 190 22"
+      }
+      MLABNetworkModelItem MLABNetworkModelItemGroup {
+        uniqueId = 37
+        objectName = Inputs:
+        parentUniqueId = 0
+        color  {
+          r = 52
+          g = 144
+          b = 16
+          a = 40
+        }
+      }
+      MLABNetworkModelItem MLABNoteItem {
+        uniqueId = 106
+        objectName = ""
+        parentUniqueId = 37
+        frame = "1000 653 200 200"
+        backgroundColor  {
+          r = 247
+          g = 221
+          b = 91
+          a = 255
+        }
+        text = "The specific input names have to be specified in the RunPythonScript.
+
+Data types are (inefficiently, but robustly) set to automatic detection since intensity range and use of float/integer may vary."
+        richText = "*<html>
+  <head>
+    <style type="text/css">
+      a.headerlink {
+        visibility: hidden;
+      }
+      table {
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <body>
+
+  <p>The specific input names have to be specified in the RunPythonScript.</p>
+<p>Data types are (inefficiently, but robustly) set to automatic detection since intensity range and use of float/integer may vary.</p>
+
+
+  </body>
+</html>*"
+        titleText = "Input note:"
+        isCollapsed = False
+        drawAsComment = False
+        titleFrame = "1005 658 190 22"
+      }
+      MLABNetworkModelItem MLABNetworkModelItemGroup {
+        uniqueId = 66
+        objectName = "Code: HERE!"
+        parentUniqueId = 0
+        color  {
+          r = 250
+          g = 0
+          b = 6
+          a = 40
+        }
+      }
+      MLABNetworkModelItem MLABNoteItem {
+        uniqueId = 69
+        objectName = ""
+        parentUniqueId = 66
+        frame = "1268 525 200 200"
+        backgroundColor  {
+          r = 247
+          g = 221
+          b = 91
+          a = 255
+        }
+        text = "The RunPythonScript module is what ensures automatic iteration through all relevant files in a specific base directory. Do check that the initializing code part is correct with regards to your own data.
+
+Further comments about the code is in the module itself."
+        richText = "*<html>
+  <head>
+    <style type="text/css">
+      a.headerlink {
+        visibility: hidden;
+      }
+      table {
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <body>
+
+  <p>The RunPythonScript module is what ensures automatic iteration through all relevant files in a specific base directory. Do check that the initializing code part is correct with regards to your own data.</p>
+<p>Further comments about the code is in the module itself.</p>
+
+
+  </body>
+</html>*"
+        titleText = Note:
+        isCollapsed = False
+        drawAsComment = False
+        titleFrame = "1273 530 190 22"
+      }
+      MLABNetworkModelItem MLABNetworkModelItemGroup {
+        uniqueId = 75
+        objectName = "Intermediate calculations:"
+        parentUniqueId = 0
+        color  {
+          r = 105
+          g = 143
+          b = 4
+          a = 40
+        }
+      }
+      MLABNetworkModelItem MLABNoteItem {
+        uniqueId = 105
+        objectName = ""
+        parentUniqueId = 75
+        frame = "1616 -315 200 200"
+        backgroundColor  {
+          r = 247
+          g = 221
+          b = 91
+          a = 255
+        }
+        text = "The threshold specified (in RunPythonScript) will not have any affect on a already binarized image."
+        richText = "*<html>
+  <head>
+    <style type="text/css">
+      a.headerlink {
+        visibility: hidden;
+      }
+      table {
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <body>
+
+  <p>The threshold specified (in RunPythonScript) will not have any affect on a already binarized image.</p>
+
+
+  </body>
+</html>*"
+        titleText = "Thresholding note:"
+        isCollapsed = False
+        drawAsComment = False
+        titleFrame = "1621 -310 190 22"
+      }
+      MLABNetworkModelItem MLABNetworkModelItemGroup {
+        uniqueId = 116
+        objectName = "Volume calculations:"
+        parentUniqueId = 0
+        color  {
+          r = 138
+          g = 56
+          b = 123
+          a = 40
+        }
+      }
+      MLABNetworkModelItem MLABNoteItem {
+        uniqueId = 138
+        objectName = ""
+        parentUniqueId = 116
+        frame = "1134 -898 228 200"
+        backgroundColor  {
+          r = 247
+          g = 221
+          b = 91
+          a = 255
+        }
+        text = "*The CalculateVolume modules "require" a binary mask of lesions to correctly measure the number of voxels (or other, but it is left at voxels in order to have flexible interpretations).*"
+        richText = "*<html>
+  <head>
+    <style type="text/css">
+      a.headerlink {
+        visibility: hidden;
+      }
+      table {
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <body>
+
+  <p>The CalculateVolume modules &quot;require&quot; a binary mask of lesions to correctly measure the number of voxels (or other, but it is left at voxels in order to have flexible interpretations).</p>
+
+
+  </body>
+</html>*"
+        titleText = "Volume calculation notes:"
+        isCollapsed = False
+        drawAsComment = False
+        titleFrame = "1139 -893 218 22"
+      }
+      MLABNetworkModelItem MLABNetworkModelItemGroup {
+        uniqueId = 141
+        objectName = "Save remaining 2 masks:"
+        parentUniqueId = 0
+        color  {
+          r = 188
+          g = 0
+          b = 229
+          a = 40
+        }
+      }
+      MLABNetworkModelItem MLABNoteItem {
+        uniqueId = 150
+        objectName = ""
+        parentUniqueId = 141
+        frame = "1937 -893 200 200"
+        backgroundColor  {
+          r = 247
+          g = 221
+          b = 91
+          a = 255
+        }
+        text = "These 2 masks (including the WMH_MAP_UBO_FIX mask) are the ones we would like to evaluate against a manual segmentation to get an idea of how well the WMH algorithms have worked."
+        richText = "*<html>
+  <head>
+    <style type="text/css">
+      a.headerlink {
+        visibility: hidden;
+      }
+      table {
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <body>
+
+  <p>These 2 masks (including the WMH_MAP_UBO_FIX mask) are the ones we would like to evaluate against a manual segmentation to get an idea of how well the WMH algorithms have worked.</p>
+
+
+  </body>
+</html>*"
+        titleText = "Mask note:"
+        isCollapsed = False
+        drawAsComment = False
+        titleFrame = "1942 -888 190 22"
+      }
+      MLABNetworkModelItem MLABNoteItem {
+        uniqueId = 151
+        objectName = ""
+        parentUniqueId = 0
+        frame = "1511 389 400 330"
+        backgroundColor  {
+          r = 255
+          g = 0
+          b = 35
+          a = 255
+        }
+        text = "*When diagnostics of which approach is better, it can be reduced to simpler cases if only UBO or LPA by themself is the undisputed "champion".
+
+If the "both" approach is the best, then this should be run as is.*"
+        richText = "*<html>
+  <head>
+    <style type="text/css">
+      a.headerlink {
+        visibility: hidden;
+      }
+      table {
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <body>
+
+  <p>When diagnostics of which approach is better, it can be reduced to simpler cases if only UBO or LPA by themself is the undisputed &quot;champion&quot;.</p>
+<p>If the &quot;both&quot; approach is the best, then this should be run as is.</p>
+
+
+  </body>
+</html>*"
+        titleText = "Regarding this pipeline:"
+        isCollapsed = False
+        drawAsComment = False
+        titleFrame = "1516 394 390 22"
+      }
+    }
+  }
+}
