@@ -37,7 +37,9 @@ Overlining means that the algorithm(s) in question is no longer considered.
 2. "Correction/fixes" of scripts in algorithm? To hinder QC web viewers from popping up for thousands of individuals and thus potentially not exceeding available RAM during the calculation period.
 3. **Settings and new Dartel atlas for 40+ population? Or simply use standard/preset ones; implies danger of over- and underfitting algorithm?**
 4. **manual_fix_world_matrix.mlab** is a MeVisLab script and a manual way of correcting the world matrices in the flairspace WMH map returned from the UBO Detector.
-5. **automatic_fix_world_matrix.mlab** is also a MeVisLab script and provided a recurring (BIDS; as LPA "requires") structure and filenames, with flairspace WMH map put into these respective folders, it does a automatic correction of the world matrix so that it actually aligns properly.
+
+## General MeVisLab scripts:
+1. 
 
 ## Primarily specifications of system(s) tested/ran on:
 - Debain 9 (Linux), Nvidia K420, Xeon 6 Core 3.60GHz.
