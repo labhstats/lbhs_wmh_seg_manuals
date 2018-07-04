@@ -20,7 +20,7 @@ module itkImageFileWriter {
     correctSubVoxelShift = FALSE
     forceDirectionCosineWrite = TRUE
     outputVoxelType = Automatic
-    info = "File saved successfully"
+    info = ""
     unresolvedFileName = $(DicomBrowserPath)/4_wmh_cases_collected/100152/UBO_wmh_map_fix.nii.gz
   }
 }
@@ -30,7 +30,7 @@ module RunPythonScript {
     moduleGroupName = "Code: HERE!"
     windows  {
       window _default {
-        geometry = "2864 45 976 1035"
+        geometry = "2863 213 976 847"
         sizeHint = "813 798"
         wasOpen = yes
       }
@@ -88,10 +88,8 @@ module RunPythonScript {
     outComment7 = out7
     outComment8 = out8
     outComment9 = out9
-    initCode = "*# Initialize global variables and functions
-global CTX
-# Use this to access the network context
-CTX=RunPythonScript_ctx.owner().owner()
+    initCode = "*# For backward compatibility, set up CTX as alias for ctx
+CTX = ctx # ctx is the network's context, not RunPythonScript's
 
 #######
 #Please take a short look through the code to ensure that everything matches with your own files.
@@ -107,7 +105,6 @@ base_summary_path = "/Users/lhi003/Documents/4_wmh_cases_collected_other/" #USER
 ##Threshold number to binarize a Probability Lesion map, 
 ## if it is already thresholded then that value will override whatever value is specified here.
 LPA_threshold = 0.05 #USER ADVISED TO DOUBLE CHECK. (Assume 0 -> 1)
-CTX.field("Threshold_LPA_PMAP.threshold").value = LPA_threshold
 
 ##STRUCTURE:
 #Assuming using the structure from the LPA run, which loosely follows the BIDS structure:
@@ -139,6 +136,8 @@ print "Ready to begin execution of Main code..."
 print "="*10*"
     wakeUpCode = ""
     code = "*
+CTX.field("Threshold_LPA_PMAP.threshold").value = LPA_threshold
+
 ###Iterating through all IDs:
 for i in id_list:
 	print "="*10
@@ -242,8 +241,10 @@ for i in id_list:
 	
 	
 print("Finished...")
-print "="*10*"
-    finalizeCode = "*print "="*10
+print "="*10
+
+##Saving to CSV:
+print "="*10
 import csv	
 
 csv_file = "wmh_volume_id_ubo_lpa_both.csv"
@@ -257,14 +258,15 @@ with open(csv_path,"w") as output:
 	
 print "Look for output at: " + str(csv_path)
 print("Finished with csv...")
-print "="*10
+print "="*10*"
+    finalizeCode = "
 
 
 
 
 
 
-*"
+"
     showFields = FALSE
     showInitCode = TRUE
     showWakeUpCode = FALSE
@@ -650,10 +652,10 @@ module SynchroView2D {
     hiResRendering = FALSE
     snapToCenter1 = FALSE
     snapToCenter2 = FALSE
-    slice1 = 162
+    slice1 = 26
     timepoint1 = 0
     filterMode = FILTER_LINEAR
-    slice2 = 162
+    slice2 = 26
     timepoint2 = 0
     lut1w = 0.970340728759766
     lut1c = 0.485170364379883
@@ -819,7 +821,7 @@ module itkImageFileWriter {
     correctSubVoxelShift = FALSE
     forceDirectionCosineWrite = TRUE
     outputVoxelType = Automatic
-    info = "File saved successfully"
+    info = ""
     unresolvedFileName = $(DicomBrowserPath)/4_wmh_cases_collected/100152/LPA_wmh_map.nii.gz
   }
 }
@@ -841,7 +843,7 @@ module itkImageFileWriter {
     correctSubVoxelShift = FALSE
     forceDirectionCosineWrite = TRUE
     outputVoxelType = Automatic
-    info = "File saved successfully"
+    info = ""
     unresolvedFileName = $(DicomBrowserPath)/4_wmh_cases_collected/100152/OR_UBO_LPA_wmh_map.nii.gz
   }
 }
