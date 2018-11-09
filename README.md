@@ -1,7 +1,7 @@
 # lbhs_wmh_seg_manuals
 Extra details of segmentation algorithms that are attempted to use. Specific detail will be given to problems and special care "required" for them to work satisfactory. This git is in no way trying to critize the algorithms or their creators, but instead to provide a subjective adaption such that it fits the intended project's (at http://www.medical-imaging.no/) needs.
 
-Check the wiki for details: https://github.com/labhracorgi/lbhs_wmh_seg_manuals/wiki
+Check the wiki for details: https://github.com/labhstats/lbhs_wmh_seg_manuals/wiki
 
 General scripts will either be referenced or provided.
 
@@ -33,7 +33,7 @@ Overlining means that the algorithm(s) in question is no longer considered.
 5. "Correction/fixes" of scripts in algorithm? To allow user specified threshold when using the job interface in MatLab/SPM12 with **binary_lesion_maps_post_LPA.m**. Caution advised.
 
 ## File descriptions: (UBO)
-1. Script for creating specified UBO directory, BIDS are initially assumed: https://github.com/labhracorgi/mri_sort_filter_convert/blob/master/other/ubo_cns_copyfier_workspace.py (or https://github.com/labhracorgi/mri_sort_filter_convert/blob/master/other/ubo_cns_copyfier_workspace_manual_ids.py for manual input of IDs.)
+1. Script for creating specified UBO directory, BIDS are initially assumed: https://github.com/labhstats/mri_sort_filter_convert/blob/master/other/ubo_cns_copyfier_workspace.py (or https://github.com/labhstats/mri_sort_filter_convert/blob/master/other/ubo_cns_copyfier_workspace_manual_ids.py for manual input of IDs.)
 2. "Correction/fixes" of scripts in algorithm? To hinder QC web viewers from popping up for thousands of individuals and thus potentially not exceeding available RAM during the calculation period.
 3. **Settings and new Dartel atlas for 40+ population? Or simply use standard/preset ones; implies danger of over- and underfitting algorithm?**
 4. **manual_fix_world_matrix.mlab** is a MeVisLab script and a manual way of correcting the world matrices in the flairspace WMH map returned from the UBO Detector.
@@ -46,4 +46,4 @@ Overlining means that the algorithm(s) in question is no longer considered.
 - macOS Sierra (Apple), Radeon Pro 555, i7 4 Core 2.8GHz.
 
 ## Software tested on:
-- Again, check the wiki for test run details https://github.com/labhracorgi/lbhs_wmh_seg_manuals/wiki.
+- Again, check the wiki for test run details https://github.com/labhstats/lbhs_wmh_seg_manuals/wiki.
