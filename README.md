@@ -12,8 +12,7 @@ Overlining means that the algorithm(s) in question is no longer considered.
 - ~~SLSToolBox:~~ https://github.com/NIC-VICOROB/SLSToolBox (Seem to require a lot of manual pre processing by the user compared to LPA and UBO; whether this is a valid arguement may not be the case.)
 - ~~DeepMedic:~~ https://github.com/Kamnitsask/deepmedic (A lot of bugs and issues for unknown reasons.)  Too many "diffuse" errors making implementation impossible to run a test case.
 - ~~W2MHS~~ algorithm at: https://www.nitrc.org/projects/w2mhs (SPM12/MatLab and SVM RF based.) May be worth looking further into.
-- ~~Winner of MICCAI 2017 WMH segmentation:~~ https://github.com/hongweilibran/wmh_ibbmTum (Competition description http://wmh.isi.uu.nl/wp-content/uploads/2017/09/sysu_media.pdf and arxiv article https://arxiv.org/pdf/1802.05203.pdf) Do not seem to have nearly enough documentation for a beginner to apply. Git is also corrupt and no way to get the "full" model to apply directly.
-- ~~NiftiNet:~~ https://github.com/NifTK/NiftyNet and https://www.sciencedirect.com/science/article/pii/S0169260717311823 (Provides only abstractions of TensorFlow... and zoo not "wide" enough. [DeepMedic is implemented which makes it the most interesting.])
+- ~~NiftiNet:~~ https://github.com/NifTK/NiftyNet and https://www.sciencedirect.com/science/article/pii/S0169260717311823 (Provides only abstractions of TensorFlow... and zoo not "wide" enough.)
 - ~~DLTK:~~ https://github.com/DLTK/DLTK (Provides only abstractions of TensorFlow... and zoo not "wide" enough.)
 
 ## Successful test runs of:
@@ -27,10 +26,9 @@ Overlining means that the algorithm(s) in question is no longer considered.
 - UBO Detector (While only using standard options.)
 - wmh_ibbmTum's U-NET that won the MICCAI 2017 WMH segmentation challenge.
 
-## File descriptions: (U-Net MICCAI)
-1. All original files are present at: https://github.com/hongweilibran/wmh_ibbmTum, although the implementation is too specialized for general use and my own modifications of these files are created. 
-2.
-3.
+## File descriptions: (U-Net MICCAI 2017)
+1. All original files are present at: https://github.com/hongweilibran/wmh_ibbmTum, although the implementation is too specialized for general use and my own modifications of these files are uploaded for reference. 
+2. A functioning modification of the origianl code is found at "my_miccai_30_formatting.py". It is rigourosly commented and maybe even too much, but perhaps also more understandable than the original. Its inputs require a directory where images are stored in some ordering, and an directory where a tranformation matrix correction (.txt) script or file is saved. This (.txt) file  can be run in BaSh given FSL installed (fslmaths); but for some reason not in BaSh via Python, thus the this implementation.
 
 ## File descriptions: (LPA)
 1. **LPA_superscript_dirpath.m**: Provided a 'glob/dir' path to T2 FLAIR NIFTI images, Python/MatLab respective functionality, this script will run LPA sequentially for every image.
