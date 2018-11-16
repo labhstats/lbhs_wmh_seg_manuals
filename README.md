@@ -20,10 +20,17 @@ Overlining means that the algorithm(s) in question is no longer considered.
 - LPA (in LST 2.0.15);
 - UBO Detector;
 - Mnist CNN example (TensorFlow/Theano) on CPU.
+- wmh_ibbmTum's U-NET that won the MICCAI 2017 WMH segmentation challenge.
 
 ## Ready for full scale project runs:
 - LPA (in LST 2.0.15);
 - UBO Detector (While only using standard options.)
+- wmh_ibbmTum's U-NET that won the MICCAI 2017 WMH segmentation challenge.
+
+## File descriptions: (U-Net MICCAI)
+1. All original files are present at: https://github.com/hongweilibran/wmh_ibbmTum, although the implementation is too specialized for general use and my own modifications of these files are created. 
+2.
+3.
 
 ## File descriptions: (LPA)
 1. **LPA_superscript_dirpath.m**: Provided a 'glob/dir' path to T2 FLAIR NIFTI images, Python/MatLab respective functionality, this script will run LPA sequentially for every image.
