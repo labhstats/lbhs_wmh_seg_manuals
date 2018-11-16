@@ -28,7 +28,7 @@ Overlining means that the algorithm(s) in question is no longer considered.
 
 ## File descriptions: (U-Net MICCAI 2017)
 1. All original files are present at: https://github.com/hongweilibran/wmh_ibbmTum, although the implementation is too specialized for general use and my own modifications of these files are uploaded for reference. 
-2. A functioning modification of the origianl code is found at "my_miccai_30_formatting.py". It is rigourosly commented and maybe even too much, but perhaps also more understandable than the original. Its inputs require a directory where images are stored in some ordering, and an directory where a tranformation matrix correction (.txt) script or file is saved. This (.txt) file  can be run in BaSh given FSL installed (fslmaths); but for some reason not in BaSh via Python, thus the this implementation.
+2. A functioning modification of the origianl code is found at "**my_miccai_30_formatting.py**". It is rigourosly commented and maybe even too much, but perhaps also more understandable than the original. Its inputs require a directory where images are stored in some ordering, and an directory where a tranformation matrix correction (.txt) script or file is saved. This (.txt) file  can be run in BaSh given FSL installed (fslmaths); but for some reason not in BaSh via Python, thus the this implementation.
 
 ## File descriptions: (LPA)
 1. **LPA_superscript_dirpath.m**: Provided a 'glob/dir' path to T2 FLAIR NIFTI images, Python/MatLab respective functionality, this script will run LPA sequentially for every image.
