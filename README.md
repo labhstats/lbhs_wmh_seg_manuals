@@ -47,6 +47,8 @@ Overlining means that the algorithm(s) in question is no longer considered.
 3. **Settings and new Dartel atlas for 40+ population? Or simply use standard/preset ones; implies danger of over- and underfitting algorithm?**
 4. **manual_fix_world_matrix.mlab** is a MeVisLab script and a manual way of correcting the world matrices in the flairspace WMH map returned from the UBO Detector.
 
+![LPA and UBO dice values](https://github.com/labhstats/lbhs_wmh_seg_manuals/blob/master/dice_box.png?raw=true)
+
 ## General MeVisLab scripts:
 1. **automatic_wmh_pipeline_lpa_ubo_w_fix.mlab** is a preliminary script that fixes everything with UBO's world matrix and calculates WMH volume as well. Exact directories and unique file specifiations are necessary to provide for the code to function properly. Is "easily downgraded" or adjusted (e.g. omitt saving certain WMH masks for larger sets of data) to whatever the end user finds to be the most efficient for the corresponding data.
 
