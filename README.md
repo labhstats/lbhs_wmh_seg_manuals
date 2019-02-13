@@ -34,6 +34,8 @@ Overlining means that the algorithm(s) in question is no longer considered.
 
 ![Performance of U-Net](https://github.com/labhstats/lbhs_wmh_seg_manuals/blob/master/dice_ravd_plot_30_cases.png?raw=true)
 
+![Boxplot of DICE U-Net](https://github.com/labhstats/lbhs_wmh_seg_manuals/blob/master/dice_box_unet.png?raw=true)
+
 ## File descriptions: (LPA)
 1. **LPA_superscript_dirpath.m**: Provided a 'glob/dir' path to T2 FLAIR NIFTI images, Python/MatLab respective functionality, this script will run LPA sequentially for every image.
 2. **binary_lesion_maps_post_LPA.m**: Provided a 'glob/dir' path to probability lesion maps (from LPA algorithm), Python/MatLab respective functionality, this script will create binary lesion maps with respect to some threshold specified by the user. (If the fix is not utilized then the threshold is "defaulted" to 0.5.)
