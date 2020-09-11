@@ -32,6 +32,16 @@ Overlining means that the algorithm(s) in question is no longer considered.
 3. Another modification named "**my_flair_n4_miccai_30_formatting.py**" is an implementation that is attuned for more pre and post processing of the data. Multiple more files (.txt) allow for instance: Easy WM mask diagnostics [we are not guaranteed that the cropping/padding won't remove any of the WM; rigid body centralization with an atlas could be a possible solution for this issue], show a list of IDs that are finished processing, and further FSL BaSh commands for external calls. A flag that specifies whether you want to continue or redo ("cont" or anything else) the segmentation is also implemented for larger sets of data.
 4. Just a more refined segmentation process similar to the previous one, named "**my_miccai_post_wm_30_formatting.py**". Cropping/padding is still poorly handled. (Runs very good with WM masking from FreeSurfer)
 
+### Deprecated Python 2 support from Tensorflow (U-Net):
+The algorithm was run in Python 2, which was deprecated post creation of this document. To avoid issues with Keras or Tensorflow the following Python 2 packages are confirmed to work:
+```
+pip2 install -Iv keras==2.2.4
+pip2 install -Iv tensorflow==1.12.0
+```
+
+"pip2" here is pip for Python 2 in a system also with Python 3.
+
+### Performance 30 cases (U-Net)
 ![Performance of U-Net](https://github.com/labhstats/lbhs_wmh_seg_manuals/blob/master/dice_ravd_plot_30_cases.png?raw=true)
 
 ![Boxplot of DICE U-Net](https://github.com/labhstats/lbhs_wmh_seg_manuals/blob/master/dice_box_unet.png?raw=true)
